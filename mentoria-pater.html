@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentoria Pater — Liderança Integral 90 dias | Instituto Paternal</title>
+<meta name="description" content="Quebre o teto invisível em 90 dias: fé, inteligência emocional e estratégia de negócios. Aplique para a Mentoria Pater.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; background: #141414; color: #FAF8F3; line-height: 1.6; }
+  .container { max-width: 680px; margin: 0 auto; padding: 24px 20px 60px; }
+  .brand { text-align: center; color: #C9A227; font-family: Arial, sans-serif; font-size: 13px; letter-spacing: 3px; font-weight: bold; margin-top: 24px; }
+  .brand-sub { text-align: center; color: #888; font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 2px; margin-top: 4px; }
+  .rule { width: 60px; height: 2px; background: #C9A227; margin: 24px auto; }
+  h1 { text-align: center; font-size: 30px; line-height: 1.25; margin-bottom: 14px; }
+  h1 .gold { color: #C9A227; }
+  .sub { text-align: center; color: #CCC; font-size: 16px; margin-bottom: 22px; }
+  .app-card { background: #1E1E1E; border: 1px solid #C9A227; border-radius: 12px; padding: 24px 20px; margin: 0 auto 28px; max-width: 560px; }
+  .app-card h2 { text-align: center; color: #C9A227; font-size: 20px; margin-bottom: 8px; }
+  .app-card .fs { text-align: center; color: #AAA; font-size: 13px; margin-bottom: 18px; }
+  label { display: block; color: #C9A227; font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin: 12px 0 4px; }
+  input, select, textarea { width: 100%; background: #141414; border: 1px solid #444; color: #FAF8F3; padding: 12px; border-radius: 6px; font-size: 15px; font-family: Georgia, serif; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid #C9A227; border-color: #C9A227; }
+  .btn { display: block; width: 100%; background: #C9A227; color: #141414; border: none; padding: 16px; border-radius: 8px; font-size: 16px; font-weight: bold; font-family: Arial, sans-serif; letter-spacing: 1px; cursor: pointer; margin-top: 20px; }
+  .btn:hover { background: #D9B23A; }
+  .btn:disabled { background: #666; cursor: wait; }
+  .privacy { text-align: center; color: #888; font-size: 12px; margin-top: 10px; }
+  .pillars { display: flex; gap: 10px; justify-content: center; margin: 18px 0; flex-wrap: wrap; }
+  .pillar { background: #1E1E1E; border: 1px solid #333; border-radius: 8px; padding: 12px 14px; text-align: center; flex: 1; min-width: 150px; }
+  .pillar b { color: #C9A227; display: block; font-size: 13px; font-family: Arial, sans-serif; letter-spacing: 1px; }
+  .pillar span { color: #AAA; font-size: 12px; }
+  .proof { background: #1E1E1E; border-radius: 8px; padding: 16px; margin: 18px 0; text-align: center; }
+  .proof p { color: #CCC; font-size: 14px; }
+  .proof b { color: #C9A227; }
+  .guarantee { text-align: center; color: #888; font-size: 13px; margin: 16px 0; }
+  .success { text-align: center; background: #1E1E1E; border: 1px solid #C9A227; border-radius: 12px; padding: 30px 20px; }
+  .success h2 { color: #C9A227; margin-bottom: 10px; }
+  .success p { color: #CCC; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="brand">INSTITUTO PATERNAL</div>
+  <div class="brand-sub">MÉTODO PATER DE LIDERANÇA INTEGRAL</div>
+  <div class="rule"></div>
+
+  <h1>O teto não está no mercado.<br>Está <span class="gold">na sua mente.</span></h1>
+  <p class="sub">Mentoria Pater: 90 dias para líderes empresariais cristãos quebrarem o teto invisível — alinhando fé, inteligência emocional e estratégia de negócios.</p>
+
+  <div class="pillars">
+    <div class="pillar"><b>FÉ</b><span>Teologia aplicada</span></div>
+    <div class="pillar"><b>INTELIGÊNCIA EMOCIONAL</b><span>Método FEBRACIS</span></div>
+    <div class="pillar"><b>ESTRATÉGIA</b><span>Governança de negócios</span></div>
+  </div>
+
+  <div class="app-card">
+    <h2>Aplicação para a Mentoria Pater</h2>
+    <p class="fs">Turma com vagas limitadas. Alexandre analisa cada aplicação e agenda uma conversa de diagnóstico.</p>
+    <form id="appForm" onsubmit="return handleApply(event)">
+      <label for="nome">Seu nome</label>
+      <input type="text" id="nome" required placeholder="Como quer ser chamado">
+      <label for="whats">Seu WhatsApp</label>
+      <input type="tel" id="whats" required placeholder="(13) 99999-9999">
+      <label for="ocup">Sua ocupação</label>
+      <select id="ocup" required>
+        <option value="">Selecione...</option>
+        <option>Empresário / Empresária</option>
+        <option>Diretor / Executivo</option>
+        <option>Advogado(a)</option>
+        <option>Médico(a) / Dentista</option>
+        <option>Engenheiro(a) / Arquiteto(a)</option>
+        <option>Consultor(a) / Coach</option>
+        <option>Terapeuta</option>
+        <option>Outro</option>
+      </select>
+      <label for="fat">Faturamento mensal aproximado</label>
+      <select id="fat" required>
+        <option value="">Selecione...</option>
+        <option>Até R$ 10.000</option>
+        <option>R$ 10.000 - R$ 30.000</option>
+        <option>R$ 30.000 - R$ 100.000</option>
+        <option>Acima de R$ 100.000</option>
+      </select>
+      <label for="teto">Qual teto você quer quebrar em 90 dias?</label>
+      <textarea id="teto" rows="3" required placeholder="Ex.: faturei R$ 30k/mês por 2 anos e não saio do lugar..."></textarea>
+      <button type="submit" class="btn">ENVIAR MINHA APLICAÇÃO</button>
+      <p class="privacy">🔒 Seus dados ficam entre você e Alexandre. Sem spam.</p>
+    </form>
+  </div>
+
+  <div class="proof">
+    <p>Quem já aplicou o método: <b>Laryssa</b> (contratos de R$ 21.000) · <b>Rubio</b> (R$ 30.000) · <b>Ewander</b> (R$ 7.000) · <b>Vinicius</b> (R$ 12.000)</p>
+  </div>
+
+  <p class="guarantee">🛡️ Garantia dupla: 7 dias incondicional · 90 dias aplicou e não transformou — devolvo tudo + R$ 500 pelo seu tempo.</p>
+
+  <div class="success" id="successMsg" style="display:none">
+    <h2>✓ Aplicação enviada</h2>
+    <p>Alexandre vai analisar sua aplicação e te chamar no WhatsApp para agendar a conversa de diagnóstico.<br><br>Enquanto isso, entre no grupo de aquecimento da turma:</p>
+    <a href="https://wa.me/5513997346101?text=Ol%C3%A1!%20Acabei%20de%20enviar%20minha%20aplica%C3%A7%C3%A3o%20para%20a%20Mentoria%20Pater.%20Meu%20nome%3A%20" class="btn" style="text-decoration:none;text-align:center">ENTRAR NO GRUPO DO WHATSAPP</a>
+  </div>
+
+  <footer style="text-align:center;color:#666;font-size:11px;margin-top:30px">
+    Instituto Paternal · Alexandre Paternal<br>Maturidade para viver. Sabedoria para liderar. Propósito para deixar um legado.
+  </footer>
+</div>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1109351768496523');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1109351768496523&ev=PageView&noscript=1"/></noscript>
+
+<script>
+var CRM_URL = 'https://crm-instituto-paternal-73979.shrd00.internal.goskip.dev/api/collections/leads/records';
+
+function handleApply(e) {
+  e.preventDefault();
+  var nome = document.getElementById('nome').value.trim();
+  var whats = document.getElementById('whats').value.trim();
+  var ocup = document.getElementById('ocup').value;
+  var fat = document.getElementById('fat').value;
+  var teto = document.getElementById('teto').value.trim();
+  var btn = document.querySelector('.btn');
+  var origText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'ENVIANDO...';
+  var digits = whats.replace(/\D/g, '');
+  if (digits && digits.charAt(0) !== '5') { digits = '55' + digits; }
+  var email = 'whatsapp' + digits + '@wa.institutopaternal.com.br';
+  var leadEventId = 'L-APP-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+  fetch(CRM_URL, {
+    method: 'POST',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      nome: nome,
+      telefone: whats,
+      email: email,
+      origem: 'Outro',
+      external_id: leadEventId,
+      estagio: 'Triagem',
+      data_entrada: new Date().toISOString().replace('T', ' ').slice(0, 19),
+      observacoes: 'APLICACAO MENTORIA PATER 90 DIAS | ocupacao: ' + ocup + ' | faturamento: ' + fat + ' | teto a quebrar: ' + teto
+    })
+  }).then(function() {
+    if (typeof fbq === 'function') { fbq('track', 'Lead', { content_name: 'mentoria-pater-aplicacao' }, { eventID: leadEventId }); }
+    document.querySelector('.app-card').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }).catch(function(err) {
+    btn.disabled = false;
+    btn.textContent = origText;
+    alert('Houve um erro no envio. Tente novamente ou chame no WhatsApp: (13) 99734-6101');
+  });
+  return false;
+}
+</script>
+</body>
+</html>
