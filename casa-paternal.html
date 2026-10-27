@@ -147,15 +147,15 @@ var LOTES = [
   { n:1, preco:497, de:"2026-11-01", ate:"2026-11-06", vagas:10,
     tag:"CONDIÇÃO DE FUNDADOR", janela:"01 a 06 de novembro",
     cond:"Para quem já acompanha o Instituto e decide primeiro.",
-    checkout:"" },
+    checkout:"https://pay.hotmart.com/O108218076M?checkoutMode=2&off=27848fhn" },
   { n:2, preco:597, de:"2026-11-07", ate:"2026-11-13", vagas:20,
     tag:"CONDIÇÃO PADRÃO", janela:"07 a 13 de novembro",
     cond:"Para quem precisa de tempo para organizar a agenda.",
-    checkout:"" },
+    checkout:"https://pay.hotmart.com/O108218076M?checkoutMode=2&off=ggpge9fn" },
   { n:3, preco:697, de:"2026-11-14", ate:"2026-11-20", vagas:20,
     tag:"CONDIÇÃO FINAL", janela:"14 a 20 de novembro",
     cond:"Para quem decide em cima da hora, com o valor cheio.",
-    checkout:"" }
+    checkout:"https://pay.hotmart.com/O108218076M?checkoutMode=2&off=itlhaap8" }
 ];
 var WHATS_EQUIPE = "5513997346101";
 var CRM='https://crm-instituto-paternal-73979.shrd00.internal.goskip.dev/api/collections/leads/records';
@@ -216,10 +216,13 @@ function irParaPagamento(e){
     }
     var link = ATUAL.checkout;
     if(link){
-      document.getElementById('checkoutLink').href = link;
+      var urlFinal = link + '&name=' + encodeURIComponent(v('nome')) +
+                    '&email=' + encodeURIComponent(v('email')) +
+                    '&phoneac=' + encodeURIComponent(tel);
+      document.getElementById('checkoutLink').href = urlFinal;
       document.getElementById('okMsg').textContent = 'Tudo pronto. Conclua o pagamento na aba segura do checkout.';
       document.getElementById('checkoutLink').style.display='block';
-      window.open(link,'_blank');
+      window.open(urlFinal,'_blank');
     } else {
       document.getElementById('okMsg').textContent = 'Seus dados foram registrados. A equipe envia o link de pagamento no seu WhatsApp em instantes.';
       document.getElementById('checkoutLink').href =
