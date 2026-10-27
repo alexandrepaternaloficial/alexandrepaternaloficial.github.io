@@ -136,7 +136,8 @@
     <p id="okMsg">Abra o checkout na nova aba e conclua o pagamento.</p>
     <p class="footnota">Assim que o pagamento for confirmado, o link do grupo oficial chega automaticamente no seu WhatsApp. <b>Só entra no grupo quem pagou.</b></p>
     <a class="btn" id="checkoutLink" href="#" target="_blank" rel="noopener">ABRIR O CHECKOUT</a>
-    <p class="footnota" style="margin-top:18px">Se o pagamento não abrir ou você preferir falar com a equipe: (13) 99734-6101</p>
+    <a class="btn btn2" id="wppFallback" href="#" target="_blank" rel="noopener">PAGAR OU TIRAR DÚVIDA NO WHATSAPP</a>
+    <p class="footnota" style="margin-top:18px">Se a página de pagamento não abrir, fale com a equipe: (13) 99734-6101</p>
   </div>
 
   <p class="ass">Maturidade para viver. Sabedoria para liderar.<br>Propósito para deixar um legado.</p>
@@ -231,6 +232,9 @@ function irParaPagamento(e){
       document.getElementById('checkoutLink').textContent='RECEBER O LINK DE PAGAMENTO NO WHATSAPP';
       document.getElementById('checkoutLink').style.display='block';
     }
+    document.getElementById('wppFallback').href =
+      'https://wa.me/'+WHATS_EQUIPE+'?text='+encodeURIComponent(
+        'Olá! Quero garantir meu lugar na CASA PATERNAL (20/11) — Lote '+ATUAL.n+' ('+brl(ATUAL.preco)+'). Meu nome: '+v('nome'));
     document.getElementById('e1').classList.remove('on');
     document.getElementById('e2').classList.remove('on');
     document.getElementById('ok').style.display='block';
@@ -249,6 +253,6 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1109351768496523');fbq('track','PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1109351768496523&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?ev=PageView&noscript=1"/></noscript>
 </body>
 </html>
