@@ -226,6 +226,9 @@ function irParaPagamento(e){
       observacoes:obs
     })}).catch(function(){}).then(function(){
     if(typeof fbq==='function'){
+      // Lead = formulario preenchido (evento que a campanha otimiza)
+      fbq('track','Lead',{content_name:'casa-paternal-20-11',value:ATUAL.preco,currency:'BRL'},{eventID:evId+'-lead'});
+      // InitiateCheckout = clique para o checkout (mantido para medir o passo seguinte)
       fbq('track','InitiateCheckout',{content_name:'casa-paternal-20-11',value:ATUAL.preco,currency:'BRL'},{eventID:evId});
     }
     var link = ATUAL.checkout;
