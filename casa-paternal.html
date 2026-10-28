@@ -202,13 +202,26 @@ function irParaPagamento(e){
   var bt=document.getElementById('bt'); bt.disabled=true; bt.textContent='PREPARANDO...';
   var tel=v('whats').replace(/\D/g,''); if(tel.charAt(0)!=='5'){tel='55'+tel;}
   var evId='CP-'+ATUAL.n+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);
-  var obs='CASA PATERNAL 20/11 | lote: '+ATUAL.n+' ('+brl(ATUAL.preco)+') | empresa: '+v('empresa')+
+  // Origem real do lead: UTM da URL (?utm_source=instagram|whatsapp|email|direto)
+  var qs=new URLSearchParams(window.location.search);
+  var utmSrc=(qs.get('utm_source')||'').toLowerCase();
+  var utmMed=(qs.get('utm_medium')||'').toLowerCase();
+  var utmCmp=(qs.get('utm_campaign')||'').toLowerCase();
+  var MAPA={instagram:'Instagram',whatsapp:'WhatsApp',email:'Email',facebook:'Facebook',
+            direto:'Outro','1a1':'Outro',indicacao:'Outro',bio:'Instagram',story:'Instagram'};
+  var origemFinal=MAPA[utmSrc]||'Outro';
+  var ref=document.referrer||'';
+  if(!utmSrc&&ref.indexOf('instagram')>=0){origemFinal='Instagram';utmSrc='instagram';}
+  if(!utmSrc&&ref.indexOf('wa.me')>=0){origemFinal='WhatsApp';utmSrc='whatsapp';}
+  var canal=utmSrc||'sem_utm';
+  var obs='CASA PATERNAL 20/11 | lote: '+ATUAL.n+' ('+brl(ATUAL.preco)+') | canal: '+canal+
+          (utmMed?('/'+utmMed):'')+(utmCmp?('/'+utmCmp):'')+' | empresa: '+v('empresa')+
           ' | funcao: '+v('cargo')+' | decisao adiada: '+v('decisao')+' | status: CHECKOUT INICIADO';
   fetch(CRM,{method:'POST',mode:'cors',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
       nome:v('nome'), telefone:v('whats'),
       email:v('email')||('whatsapp'+tel+'@wa.institutopaternal.com.br'),
-      origem:'Outro', external_id:evId, estagio:'Triagem',
+      origem:origemFinal, external_id:evId, estagio:'Triagem',
       data_entrada:new Date().toISOString().replace('T',' ').slice(0,19),
       observacoes:obs
     })}).catch(function(){}).then(function(){
