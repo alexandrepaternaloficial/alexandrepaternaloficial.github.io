@@ -309,6 +309,16 @@ function irParaPagamento(e){
       // Nao perder o lead: mostra o contato direto da equipe antes de mandar ao checkout
       var aviso=document.getElementById('avisoLead');
       if(aviso){ aviso.style.display='block'; }
+    } else {
+      // Alerta no WhatsApp do CEO em tempo real (nao bloqueia o checkout se falhar)
+      try{
+        fetch(CRM.replace('/api/collections/leads/records','/backend/v1/lead/novo'),{
+          method:'POST',mode:'cors',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({nome:v('nome'),telefone:v('whats'),email:v('email'),
+            lote:ATUAL.n,valor:ATUAL.preco,canal:canal,decisao:v('decisao'),
+            empresa:v('empresa'),cargo:v('cargo')})
+        }).catch(function(){});
+      }catch(eignorado){}
     }
     if(typeof fbq==='function'){
       // Lead = formulario preenchido (evento que a campanha otimiza)
