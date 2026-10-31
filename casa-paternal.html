@@ -67,9 +67,12 @@
   .custo h2{color:#E08585;font-size:16px;font-family:Arial,sans-serif;margin-bottom:9px;letter-spacing:.6px}
   .custo li{color:#D8D3C7;font-size:14.5px;padding:4px 0 4px 20px;position:relative;list-style:none}
   .custo li:before{content:"×";position:absolute;left:0;color:#E08585;font-weight:bold}
-  .quem{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
-  .quem img{width:74px;height:74px;border-radius:50%;object-fit:cover;border:2px solid #C9A227;flex-shrink:0}
-  .quem div{flex:1;min-width:200px}
+  .quem{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+  .quem img{width:132px;height:132px;border-radius:50%;object-fit:cover;object-position:center 18%;border:3px solid #C9A227;flex-shrink:0;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+  .quem div{flex:1;min-width:210px}
+  .quem .assinatura{font-family:Arial,sans-serif;font-size:11px;letter-spacing:1.6px;color:#C9A227;text-transform:uppercase;margin-top:10px}
+  .quem .credenciais{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+  .quem .credenciais span{font-family:Arial,sans-serif;font-size:10.5px;letter-spacing:.5px;color:#C9A227;border:1px solid #3A362C;border-radius:4px;padding:4px 8px}
 </style>
 </head>
 <body>
@@ -148,10 +151,18 @@
     <div class="bloco">
       <h2>QUEM CONDUZ</h2>
       <div class="quem">
-        <img src="https://institutopaternal.com.br/assets/logo-instituto-paternal-381ba-BLZGw65G.jpeg" alt="Alexandre Paternal">
+        <img src="https://institutopaternal.com.br/assets/alexandre-paternal-480.jpg" alt="Alexandre Paternal, fundador do Instituto Paternal" width="132" height="132">
         <div>
-          <p><b>Alexandre Paternal</b> — fundador da Paterseg, empresa de medicina e segurança do trabalho com mais de 15 anos de operação real. Perito da Justiça do Trabalho. Teólogo. Master Coach Integral Sistêmico.</p>
-          <p style="font-size:14px;color:#96948F">Não é palestrante. É dono de operação, que já errou, corrigiu e continua na mesa.</p>
+          <p style="margin-bottom:4px"><b style="font-size:17px">Alexandre Paternal</b></p>
+          <p>Fundador da Paterseg, empresa de medicina e segurança do trabalho com mais de 15 anos de operação real. Perito da Justiça do Trabalho. Teólogo. Master Coach Integral Sistêmico.</p>
+          <p style="font-size:14px;color:#96948F;margin-bottom:0">Não é palestrante. É dono de operação, que já errou, corrigiu e continua na mesa.</p>
+          <div class="credenciais">
+            <span>15 ANOS DE OPERAÇÃO</span>
+            <span>PERITO JUDICIAL</span>
+            <span>MASTER COACH</span>
+            <span>TEÓLOGO</span>
+          </div>
+          <p class="assinatura">Maturidade para viver · Sabedoria para liderar · Propósito para deixar legado</p>
         </div>
       </div>
     </div>
