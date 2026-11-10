@@ -94,12 +94,12 @@
     <div class="passos"><b>1 · ESCOLHA</b> · 2 · PAGAMENTO · 3 · GRUPO</div>
 
     <div class="vigente">
-      <span class="tag" id="vTag">LOTE 1</span>
-      <div class="nome">LOTE <span id="vNum">1</span> · <span id="vJanela">28 de outubro a 06 de novembro</span></div>
+      <span class="tag" id="vTag">VALOR ÚNICO</span>
+      <div class="nome" id="vJanela">CASA PATERNAL · 20 DE NOVEMBRO DE 2026</div>
       <div class="preco" id="vPreco">R$ 497</div>
-      <div class="cond" id="vCond">Para quem já acompanha o Instituto e decide primeiro.</div>
-      <div class="vagas" id="vVagas">20 vagas neste lote</div>
-      <div class="prox" id="vProx"></div>
+      <div class="cond" id="vCond">Preço único — não haverá lote 2 nem lote 3.</div>
+      <div class="vagas" id="vVagas">Inscrições encerram 19/11 às 18h</div>
+      <div class="prox" id="vProx">50 lugares. Nem um a mais.</div>
     </div>
 
     <button class="btn" onclick="irParaDados()">GARANTIR MEU LUGAR · <span id="btnPreco">R$ 497</span></button>
@@ -210,8 +210,8 @@
     <p id="avisoLead" style="display:none;background:#3a1f1f;border:1px solid #8a4b4b;color:#F5F1E8;padding:12px 14px;border-radius:6px;margin:14px 0;font-family:Arial,sans-serif;font-size:14px">
       Não conseguimos registrar seus dados automaticamente. <b>Fale com a equipe no WhatsApp (13) 99734-6101</b> antes de pagar, para garantirmos seu lugar.
     </p>
-    <a class="btn" id="checkoutLink" href="#" target="_blank" rel="noopener">ABRIR O CHECKOUT</a>
-    <a class="btn btn2" id="wppFallback" href="#" target="_blank" rel="noopener">PAGAR OU TIRAR DÚVIDA NO WHATSAPP</a>
+    <a class="btn" id="checkoutLink" href="https://pay.hotmart.com/O108218076M" target="_blank" rel="noopener">ABRIR O CHECKOUT</a>
+    <a class="btn btn2" id="wppFallback" href="https://wa.me/5513997346101?text=Ol%C3%A1!%20Quero%20garantir%20meu%20lugar%20na%20CASA%20PATERNAL%20(20%2F11)." target="_blank" rel="noopener">PAGAR OU TIRAR DÚVIDA NO WHATSAPP</a>
     <p class="footnota" style="margin-top:16px">Se a página de pagamento não abrir, fale com a equipe: (13) 99734-6101</p>
   </div>
 
@@ -261,55 +261,51 @@
   </div>
 
   <button class="btn" onclick="irParaDados()" style="margin-top:6px">ÚLTIMO PASSO · <span id="btnPreco4">R$ 497</span></button>
-  <p class="aviso">20 vagas neste lote. Depois dele, o valor sobe.</p>
+  <p class="aviso">Preço único de R$ 497. Inscrições encerram 19/11 às 18h.</p>
 
   <p class="ass">Maturidade para viver. Sabedoria para liderar.<br>Propósito para deixar um legado.</p>
 </div>
 
 <script>
-var LOTES = [
-  { n:1, preco:497, de:"2026-10-28", ate:"2026-11-06", vagas:20,
-    tag:"LOTE 1 · FUNDADOR", janela:"28 de outubro a 06 de novembro",
-    cond:"Para quem já acompanha o Instituto e decide primeiro.",
-    checkout:"https://pay.hotmart.com/O108218076M?checkoutMode=2&off=27848fhn" },
-  { n:2, preco:597, de:"2026-11-07", ate:"2026-11-13", vagas:20,
-    tag:"LOTE 2 · PADRÃO", janela:"07 a 13 de novembro",
-    cond:"Para quem precisa de tempo para organizar a agenda.",
-    checkout:"https://pay.hotmart.com/O108218076M?checkoutMode=2&off=ggpge9fn" },
-  { n:3, preco:697, de:"2026-11-14", ate:"2026-11-20", vagas:20,
-    tag:"LOTE 3 · FINAL", janela:"14 a 20 de novembro",
-    cond:"Para quem decide em cima da hora, com o valor cheio.",
-    checkout:"https://pay.hotmart.com/O108218076M?checkoutMode=2&off=itlhaap8" }
-];
+// PRECO UNICO R$ 497 — decisao do Alexandre em 08/11/2026: nao existe lote 2 nem lote 3.
+// O checkout oficial (Hotmart O108218076M) ja cobra R$ 497 (12x de R$ 51,40).
+var FAIXA = {
+  n: 1, preco: 497,
+  tag: "VALOR ÚNICO",
+  janela: "CASA PATERNAL · 20 DE NOVEMBRO DE 2026",
+  cond: "Preço único — não haverá lote 2 nem lote 3.",
+  vagas: 50,
+  prazo: "Inscrições encerram 19/11 às 18h",
+  checkout: "https://pay.hotmart.com/O108218076M"
+};
+// Mantido com o nome LOTES para nao quebrar as referencias do restante da pagina:
+// uma unica faixa, sempre vigente.
+var LOTES = [FAIXA];
 var WHATS_EQUIPE = "5513997346101";
-var CRM='https://crm-instituto-paternal-73979.shrd00.internal.goskip.dev/api/collections/leads/records';
+// O CRM exige login na API crua do PocketBase (/api/collections/leads/records -> 400 desde a
+// migracao 0016). A porta publica de escrita e a rota abaixo, que so CRIA lead e nunca le.
+var CRM_BASE = 'https://crm-instituto-paternal-73979.shrd00.internal.goskip.dev';
+var CRM_LEAD = CRM_BASE + '/backend/v1/casa/lead';
+var CRM_ALERTA = CRM_BASE + '/backend/v1/lead/novo';
+var CRM = CRM_LEAD;
 
 function loteVigente(){
-  var hoje = new Date(); hoje.setHours(0,0,0,0);
-  for (var i=0;i<LOTES.length;i++){
-    var L=LOTES[i], de=new Date(L.de+"T00:00:00"), ate=new Date(L.ate+"T23:59:59");
-    if (hoje>=de && hoje<=ate) return L;
-  }
-  if (hoje < new Date(LOTES[0].de+"T00:00:00")) return LOTES[0];
-  return LOTES[2];
+  // Sem lotes: a faixa e uma so ate o encerramento das inscricoes (19/11 as 18h).
+  return FAIXA;
 }
 var ATUAL = loteVigente();
 function brl(v){ return "R$ " + v.toLocaleString('pt-BR'); }
 
 function render(){
-  document.getElementById('vTag').textContent = ATUAL.tag;
-  document.getElementById('vNum').textContent = ATUAL.n;
-  document.getElementById('vJanela').textContent = ATUAL.janela;
-  document.getElementById('vPreco').textContent = brl(ATUAL.preco);
-  document.getElementById('vCond').textContent = ATUAL.cond;
-  document.getElementById('vVagas').textContent = ATUAL.vagas + " vagas neste lote";
+  document.getElementById('vTag').textContent = FAIXA.tag;
+  document.getElementById('vJanela').textContent = FAIXA.janela;
+  document.getElementById('vPreco').textContent = brl(FAIXA.preco);
+  document.getElementById('vCond').textContent = FAIXA.cond;
+  document.getElementById('vVagas').textContent = "Inscrições encerram 19/11 às 18h";
   ['btnPreco','btnPreco2','btnPreco3','btnPreco4'].forEach(function(id){
-    var el=document.getElementById(id); if(el) el.textContent = brl(ATUAL.preco);
+    var el=document.getElementById(id); if(el) el.textContent = brl(FAIXA.preco);
   });
-  var prox = LOTES[ATUAL.n];
-  document.getElementById('vProx').textContent = prox
-    ? "Depois deste: Lote " + prox.n + " · " + brl(prox.preco) + " (" + prox.janela + ")"
-    : "Último lote — encerra em 20/11";
+  document.getElementById('vProx').textContent = FAIXA.vagas + " lugares. Nem um a mais.";
 }
 render();
 
@@ -348,7 +344,7 @@ function irParaPagamento(e){
   if(!utmSrc&&ref.indexOf('instagram')>=0){origemFinal='Instagram';utmSrc='instagram';}
   if(!utmSrc&&ref.indexOf('wa.me')>=0){origemFinal='WhatsApp';utmSrc='whatsapp';}
   var canal=utmSrc||'sem_utm';
-  var obs='CASA PATERNAL 20/11 | lote: '+ATUAL.n+' ('+brl(ATUAL.preco)+') | canal: '+canal+
+  var obs='CASA PATERNAL 20/11 | faixa: UNICA | preco: '+brl(ATUAL.preco)+' | canal: '+canal+
           (utmMed?('/'+utmMed):'')+(utmCmp?('/'+utmCmp):'')+' | empresa: '+v('empresa')+
           ' | funcao: '+v('cargo')+' | decisao adiada: '+(v('decisao')||'—')+' | status: CHECKOUT INICIADO';
   var payload={
@@ -358,7 +354,7 @@ function irParaPagamento(e){
       data_entrada:new Date().toISOString().replace('T',' ').slice(0,19),
       observacoes:obs
   };
-  function postar(p){ return fetch(CRM,{method:'POST',mode:'cors',
+  function postar(p){ return fetch(CRM_LEAD,{method:'POST',mode:'cors',
       headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}); }
   // Grava o lead com 1 retry saneado. O erro NAO pode mais ser engolido: se o CRM recusar,
   // o visitante recebe o WhatsApp da equipe em vez de desaparecer.
@@ -379,7 +375,7 @@ function irParaPagamento(e){
     } else {
       // Alerta no WhatsApp do CEO em tempo real (nao bloqueia o checkout se falhar)
       try{
-        fetch(CRM.replace('/api/collections/leads/records','/backend/v1/lead/novo'),{
+        fetch(CRM_ALERTA,{
           method:'POST',mode:'cors',headers:{'Content-Type':'application/json'},
           body:JSON.stringify({nome:v('nome'),telefone:v('whats'),email:v('email'),
             lote:ATUAL.n,valor:ATUAL.preco,canal:canal,decisao:v('decisao'),
@@ -395,9 +391,13 @@ function irParaPagamento(e){
     }
     var link = ATUAL.checkout;
     if(link){
-      var urlFinal = link + '&name=' + encodeURIComponent(v('nome')) +
-                    '&email=' + encodeURIComponent(v('email')) +
-                    '&phoneac=' + encodeURIComponent(tel);
+      // O link oficial (pay.hotmart.com/O108218076M) NAO tem querystring:
+      // concatenar '&name=' geraria ...O108218076M&name=... e o checkout nao abriria.
+      var sep1 = link.indexOf('?') >= 0 ? '&' : '?';
+      var sep2 = '&';
+      var urlFinal = link + sep1 + 'name=' + encodeURIComponent(v('nome')) +
+                    sep2 + 'email=' + encodeURIComponent(v('email')) +
+                    sep2 + 'phoneac=' + encodeURIComponent(tel);
       document.getElementById('checkoutLink').href = urlFinal;
       document.getElementById('okMsg').textContent = 'Tudo pronto. Conclua o pagamento na aba segura do checkout.';
       document.getElementById('checkoutLink').style.display='block';
@@ -406,13 +406,13 @@ function irParaPagamento(e){
       document.getElementById('okMsg').textContent = 'Seus dados foram registrados. A equipe envia o link de pagamento no seu WhatsApp em instantes.';
       document.getElementById('checkoutLink').href =
         'https://wa.me/'+WHATS_EQUIPE+'?text='+encodeURIComponent(
-          'Olá! Quero pagar meu lugar na CASA PATERNAL (20/11) — Lote '+ATUAL.n+' ('+brl(ATUAL.preco)+'). Meu nome: '+v('nome'));
+          'Olá! Quero pagar meu lugar na CASA PATERNAL (20/11) — valor único '+brl(ATUAL.preco)+'. Meu nome: '+v('nome'));
       document.getElementById('checkoutLink').textContent='RECEBER O LINK DE PAGAMENTO NO WHATSAPP';
       document.getElementById('checkoutLink').style.display='block';
     }
     document.getElementById('wppFallback').href =
       'https://wa.me/'+WHATS_EQUIPE+'?text='+encodeURIComponent(
-        'Olá! Quero garantir meu lugar na CASA PATERNAL (20/11) — Lote '+ATUAL.n+' ('+brl(ATUAL.preco)+'). Meu nome: '+v('nome'));
+        'Olá! Quero garantir meu lugar na CASA PATERNAL (20/11) — valor único '+brl(ATUAL.preco)+'. Meu nome: '+v('nome'));
     document.getElementById('e1').classList.remove('on');
     document.getElementById('e2').classList.remove('on');
     document.getElementById('ok').style.display='block';
